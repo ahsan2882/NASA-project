@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "test": "jest",
-    "test-watch":"jest --watch",
+    "test-watch": "jest --watch",
     "watch": "nodemon src/server.js",
     "start": "node src/server.js"
   },
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "jest": "^27.5.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }
