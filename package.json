@@ -12,9 +12,9 @@
     "watch": "npm-run-all -p server-dev client",
     "server": "npm start --prefix server",
     "deploy": "npm run build --prefix client && npm run server",
-    "test-server": "npm run test --prefix server",
-    "test-client": "npm run test --prefix client",
-    "test-all": "npm-run-all -p test-server test-client"
+    "test-server": "npm test --prefix server",
+    "test-client": "npm test --prefix client",
+    "test-all": "npm-run-all -s test-server test-client"
   },
   "repository": {
     "type": "git",
