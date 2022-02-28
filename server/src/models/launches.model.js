@@ -6,19 +6,6 @@ const planets = require('./planets.mongo');
 
 const DEFAULT_FLIGHT_NUMBER = 1;
 
-const launch = {
-    flightNumber: 1000, //flight_number
-    mission: 'Hubble', //name
-    rocket: 'Rover', //rocket.name
-    launchDate: new Date('April 1, 2069'), //date_local
-    target: 'Kepler-1652 b', //Not applicable
-    customers: ['NASA', 'NOAA', 'Elon Musk'], //payloads.customers
-    upcoming: true, //upcoming
-    success: true //success
-};
-
-saveLaunch(launch);
-
 const SPACEX_API_URL = "https://api.spacexdata.com/v4/launches/query";
 
 async function populateLaunches() {
@@ -72,7 +59,7 @@ async function loadLaunchesData() {
     const firstLaunch = await findLaunch({
         flightNumber: 1,
         rocket: 'Falcon 1',
-        mission:'FalconSat'
+        mission: 'FalconSat'
     });
     if (firstLaunch) {
         console.log('Launch data already exists');
@@ -84,7 +71,7 @@ async function loadLaunchesData() {
         };
     }
 
-    
+
 
 }
 
@@ -108,15 +95,15 @@ async function getLatestFlightNumber() {
     return latestLaunch.flightNumber;
 }
 
-async function getAllLaunches() {
-    return await launchesDB.find({}, {
-        '_id': 0,
-        '__v': 0
-    });
+async function getAllLaunches(skip, limit) {
+    return await launchesDB.find({}, {'_id': 0,'__v': 0})
+        .sort('flightNumber')
+        .skip(skip)
+        .limit(limit);
 }
 
 async function saveLaunch(launch) {
-    
+
     await launchesDB.findOneAndUpdate({
         flightNumber: launch.flightNumber,
     }, launch, {
